@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "hexplorer"
+version = "0.1.0"
+description = "Hexplorer aims to be a simple module to interact with the League of Legends developer APIs."
+authors = ["SillyPlays"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = {extras = ["dotenv"], version = "^1.9.0"}
+requests = "^2.27.1"
+loguru = "^0.5.3"
+
+[tool.poetry.dev-dependencies]
+datamodel-code-generator = "^0.11.15"
+pyright = "^0.0.13"
+isort = "^5.10.1"
+black = "^21.12b0"
+
+[tool.black]
+line-length = 120
+
+[tool.pyright]
+include = ["hexplorer"]
+exclude = ["**/__pycache__"]
+ignore = ["old"]
+reportMissingImports = true
+reportMissingTypeStubs = true
+pythonVersion = "3.8"
+pythonPlatform = "Linux"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
