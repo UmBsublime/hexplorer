@@ -10,7 +10,7 @@ from hexplorer.api.lol.status import StatusV4
 from hexplorer.api.lol.summoner import SummonerV4
 from hexplorer.api.riot import Account
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 class LolApiDispatch:

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexplorer"
-version = "0.1.0"
+version = "0.1.1"
 description = "Hexplorer aims to be a simple module to interact with the League of Legends developer APIs."
 authors = ["SillyPlays"]
 
