@@ -43,7 +43,7 @@ from hexplorer.config import Settings
 from hexplorer.constants import Continent, Division, Queue, Region, Tier
 
 settings = Setings(api_key='RGAPI-123code')
-riot_api = RiotApiDispatch(SETTINGS.api_key)
+riot_api = RiotApiDispatch(settings.api_key)
 
 me = riot_api.lol.summoner.by_name(Region.NA1, 'SillyPlays')
 
