@@ -5,7 +5,6 @@ from hexplorer.constants import Region
 from hexplorer.models import clash_v1
 
 
-# /lol/clash/v1/players/by-summoner/{summonerId}
 class Clash(LolApi):
     name = "clash"
 

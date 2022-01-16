@@ -29,6 +29,5 @@ class ChampionMasteryV4(ChampionMastery):
             champion_mastery_v4.ChampionMasteryDto,
         )
 
-    # scores/by-summoner/{encryptedSummonerId}
     def score_by_summoner(self, region: Region, summoner_id: str) -> int:
         return self.get_object(region, f"scores/by-summoner/{summoner_id}", int)
