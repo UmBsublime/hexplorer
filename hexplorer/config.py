@@ -16,7 +16,7 @@ SETTINGS = Settings()
 
 LONG_LOG_FORMAT = "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level:<8}</level>| <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
 
-SHORT_LOG_FORMAT = "<level>{level:<8}</level>| <cyan>{function}</cyan> | <level>{message}</level>"
+SHORT_LOG_FORMAT = "<level>{level:<8}</level>| <cyan>{function:16}</cyan> | <level>{message}</level>"
 
 STDERR_HANDLER = [
     {
@@ -24,7 +24,6 @@ STDERR_HANDLER = [
         "format": SHORT_LOG_FORMAT,
         "backtrace": True,
         "diagnose": True,
-        "level": "DEBUG",
     },
 ]
 
