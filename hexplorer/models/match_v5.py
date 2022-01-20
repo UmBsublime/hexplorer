@@ -240,7 +240,7 @@ class MatchTimelineDto(BaseModel):
     info: MatchTimelineInfo
 
 
-class ParticipantDto(BaseModel):
+class ParticipantDtoBase(BaseModel):
     assists: int
     baronKills: int
     bountyLevel: int
@@ -305,7 +305,6 @@ class ParticipantDto(BaseModel):
     objectivesStolenAssists: int
     participantId: int
     pentaKills: int
-    perks: PerksDto
     physicalDamageDealt: int
     physicalDamageDealtToChampions: int
     physicalDamageTaken: int
@@ -360,7 +359,11 @@ class ParticipantDto(BaseModel):
     win: bool
 
 
-class InfoDto(BaseModel):
+class ParticipantDto(ParticipantDtoBase):
+    perks: Optional[PerksDto] = Field(default=None)
+
+
+class InfoDtoBase(BaseModel):
     gameCreation: int = Field(
         ...,
         description="Unix timestamp for when the game is created on the game server (i.e., the loading screen).",
@@ -383,14 +386,20 @@ class InfoDto(BaseModel):
         description="The first two parts can be used to determine the patch a game was played on.",
     )
     mapId: int = Field(..., description="Refer to the Game Constants documentation.")
-    participants: List[ParticipantDto]
     platformId: str = Field(..., description="Platform where the match was played.")
     queueId: int = Field(..., description="Refer to the Game Constants documentation.")
-    teams: List[TeamDto]
     tournamentCode: Optional[str] = Field(
         None,
         description="Tournament code used to generate the match. This field was added to match-v5 in patch 11.13 on June 23rd, 2021.",
     )
+
+
+class InfoDto(InfoDtoBase):
+    participants: List[ParticipantDto]
+    teams: Optional[List[TeamDto]]
+
+    class Config:
+        orm_mode = True
 
 
 class MatchDto(BaseModel):
