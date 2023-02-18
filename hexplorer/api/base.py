@@ -20,7 +20,7 @@ class Api:
         self.base_log = f"<cyan>{self.__class__.__name__:18}</cyan><white>|</white>"
 
     @staticmethod
-    def __create_object(response: Union[Dict, List], obj: Any) -> Union[Dict, List]:
+    def __create_object(response: Union[Dict, List], obj: Any) -> Any:
 
         logger.trace(response)
         if obj == type(response):

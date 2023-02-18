@@ -9,6 +9,7 @@ python = "^3.8"
 pydantic = {extras = ["dotenv"], version = "^1.9.0"}
 requests = "^2.27.1"
 loguru = "^0.5.3"
+sqlmodel = "^0.0.6"
 
 [tool.poetry.dev-dependencies]
 datamodel-code-generator = "^0.11.15"
