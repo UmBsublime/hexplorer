@@ -5,11 +5,12 @@ description = "Hexplorer aims to be a simple module to interact with the League 
 authors = ["SillyPlays"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 pydantic = {extras = ["dotenv"], version = "^1.9.0"}
 requests = "^2.27.1"
 loguru = "^0.5.3"
 sqlmodel = "^0.0.6"
+textual = "^0.41.0"
 
 [tool.poetry.dev-dependencies]
 datamodel-code-generator = "^0.11.15"
