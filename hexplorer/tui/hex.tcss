@@ -1,8 +1,8 @@
 Screen {
-    layout: grid;
-    grid-size: 2;
-    grid-gutter: 2;
-    padding: 2;
+    # layout: grid;
+    # grid-size: 2;
+    # grid-gutter: 2;
+    padding: 1;
 }
 #question {
     width: 100%;

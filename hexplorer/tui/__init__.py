@@ -1,3 +1,3 @@
-from hexplorer.tui.app import HexApp
+from hexplorer.tui.hexapp import HexApp
 
 __all__ = ['HexApp']
