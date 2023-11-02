@@ -20,25 +20,20 @@ def get_api_route_endpoints(api_route):
         if callable(method) and not method_name.startswith('_'):
             if method_name == 'get_object':
                 continue
-            from inspect import signature
-            s = signature(method)
-            #help(s)
-            print("TITI", s.return_annotation)
 
             params = get_type_hints(method)
 
             returntype = params.pop('return')
+            if str(returntype).startswith('<'):
+                returntype = returntype.__name__
+            else:
+                #print(returntype.__dict__)
+                returntype = f"{returntype.__origin__.__name__}[{returntype.__args__[0].__name__}]"
 
-            request = ApiRequest(name=method_name, method=method, arguments=params, returntype=s.return_annotation)
-            #print(repr(returntype))
+            request = ApiRequest(name=method_name, method=method, arguments=params, returntype=returntype)
+            # print(returntype)
             object_methods.append(request)
 
-            #params = []
-            #for param in s.parameters.values():
-            #    new_s = {'name': param.name, 'type': param.annotation}
-            #    params.append(new_s)
-            #print("HEELO", str(s.return_annotation))
-            #print(get_type_hints(method))
 
     return object_methods
 

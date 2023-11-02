@@ -6,26 +6,28 @@ from textual.widgets import Label
 
 
 class Dummy:
-    def func1(self, x: int, y: list[str]) -> list[bool]:
+    def func(self, x: int, y: list[str]) -> list[bool]:
         ...
-
-
-typing_1 = get_type_hints(Dummy.func1)
-#typing_2 = get_type_hints(Dummy.func2)
-inspect_1 = signature(Dummy.func1)
-#inspect_2 = signature(Dummy.func2)
-
-typing_test = f"typing:  {typing_1}"
-inspect_test = f"inspect: {inspect_1}"
-
 
 class TestApp(App):
     def compose(self):
         yield Label(typing_test)
-        yield Label(inspect_test)
+        yield Label(inspect_test, markup=False)
 
+typing_test = f"typing:  {get_type_hints(Dummy.func)}"
+inspect_test = f"inspect: {signature(Dummy.func)}"
 
 app = TestApp()
 app.run()
 print(typing_test)
 print(inspect_test)
+
+
+
+# Output in the terminal:
+# typing:  {'x': <class 'int'>, 'y': list[str], 'return': list[bool]}
+# inspect: (self, x: int, y: list[str]) -> list[bool]
+
+# Output in the textual app:
+# typing:  {'x': <class 'int'>, 'y': list, 'return': list}
+# inspect: (self, x: int, y: list) -> list
