@@ -3,7 +3,7 @@ import sys
 from hexplorer.tui import HexApp
 
 if __name__ == "__main__":
-    from hexplorer.tui.helper import get_api_route_endpoints
+    from hexplorer.tui.widgets.api_explorer import get_api_route_endpoints
     from hexplorer import LolApiDispatch
 
     #for api, routes in LolApiDispatch('').__dict__.items():
