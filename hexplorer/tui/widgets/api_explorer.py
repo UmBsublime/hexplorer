@@ -105,8 +105,6 @@ class ApiDispatchExplorer(Widget):
         ...
 
 
-
-
 def get_api_tree(api) -> Tree[dict]:
     api_tree = Tree(api.__class__.__name__, name="api_tree", data=api)
     api_tree.show_root = False
@@ -141,7 +139,7 @@ def get_route_tree(api_dispatch) -> Tree[dict]:
     return api_tree
 
 
-def get_api_route_endpoints(api_route):
+def get_api_route_endpoints(api_route: RiotApi):
     object_methods = []
     for method_name in dir(api_route):
         method = getattr(api_route, method_name)
@@ -155,11 +153,9 @@ def get_api_route_endpoints(api_route):
             if str(returntype).startswith('<'):
                 returntype = returntype.__name__
             else:
-                #print(returntype.__dict__)
                 returntype = f"{returntype.__origin__.__name__}[{returntype.__args__[0].__name__}]"
 
             request = ApiRequest(name=method_name, method=method, arguments=params, returntype=returntype)
-            # print(returntype)
             object_methods.append(request)
 
     return object_methods

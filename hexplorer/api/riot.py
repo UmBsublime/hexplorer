@@ -1,7 +1,7 @@
 from typing import Any
 
 from hexplorer.api.base import Api
-from hexplorer.constants import ApiRegion, Continent, HTTP_method, Region
+from hexplorer.constants import ApiRegion, Continent, HTTPVerb, Region
 from hexplorer.models import account_v1
 
 
@@ -18,7 +18,7 @@ class RiotApi(Api):
         return self.base_url.format(region.name.lower())
 
     def get_object(self, region: ApiRegion, endpoint: str, obj: Any) -> Any:
-        return self._request_object(self.__gen_api_region_url(region), HTTP_method.GET, endpoint, obj)
+        return self._request_object(self.__gen_api_region_url(region), HTTPVerb.GET, endpoint, obj)
 
 
 class LolApi(RiotApi):

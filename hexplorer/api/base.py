@@ -8,7 +8,7 @@ from hexplorer.api.exceptions import (ApiBadRequestError,
                                       ApiRateLimitExceededError,
                                       ApiResourceNotFoundError,
                                       ApiUnauthorizedError)
-from hexplorer.constants import HTTP_method
+from hexplorer.constants import HTTPVerb
 
 
 class Api:
@@ -36,7 +36,7 @@ class Api:
     def __gen_url(self, api_url: str, path: str) -> str:
         return f"{api_url}/{self.base_endpoint}/{path}"
 
-    def __make_request(self, api_url: str, method: HTTP_method, endpoint: str, data: Dict = None) -> requests.Response:
+    def __make_request(self, api_url: str, method: HTTPVerb, endpoint: str, data: Dict = None) -> requests.Response:
         url = self.__gen_url(api_url, endpoint)
         req = requests.Request(method.name, url, data=data)
         prepped = self.session.prepare_request(req)
@@ -62,7 +62,7 @@ class Api:
         finally:
             logger.trace(response.json())
 
-    def _request_object(self, api_url: str, method: HTTP_method, endpoint: str, obj: Any, data: Dict = None) -> Any:
+    def _request_object(self, api_url: str, method: HTTPVerb, endpoint: str, obj: Any, data: Dict = None) -> Any:
         response = self.__make_request(api_url, method, endpoint, data)
         logger.opt(colors=True).debug(
             f"{self.base_log} {response.status_code} {method.name} {self.__gen_url(api_url, endpoint)} <green>{obj.__name__}</green>"

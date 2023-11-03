@@ -77,7 +77,7 @@ class Region(ApiRegion):
     TR1 = auto()
 
 
-class HTTP_method(AutoName):
+class HTTPVerb(AutoName):
     GET = auto()
     PUT = auto()
     POST = auto()

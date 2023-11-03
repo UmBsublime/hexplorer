@@ -1,7 +1,7 @@
 from typing import List, Union
 
 from hexplorer.api.base import Api
-from hexplorer.constants import HTTP_method
+from hexplorer.constants import HTTPVerb
 from hexplorer.models.datadragron_runes import RuneStyleDTO
 
 
@@ -18,7 +18,7 @@ class DataDragon(Api):
     def runes_reforged(self) -> List[RuneStyleDTO]:
         if not self._runes_reforged:
             self._runes_reforged = self._request_object(
-                self.base_url, HTTP_method.GET, f"runesReforged.json", RuneStyleDTO
+                self.base_url, HTTPVerb.GET, f"runesReforged.json", RuneStyleDTO
             )
         return self._runes_reforged
 
