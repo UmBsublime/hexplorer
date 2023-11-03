@@ -1,4 +1,4 @@
-from hexplorer.tui.widgets.api_explorer import ApiDispatchExplorer, ApiExplorer
+from hexplorer.tui.widgets.api_explorer import ApiExplorer
 
 
-__all__ = ['ApiDispatchExplorer', 'ApiExplorer']
+__all__ = ['ApiExplorer']
