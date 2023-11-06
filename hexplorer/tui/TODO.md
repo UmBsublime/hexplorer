@@ -1,0 +1,21 @@
+## Wishlist
+
+- Reactive shared variables for
+  - Region
+  - Continent
+  - player_name
+  - player_id (puuid)
+- Main menu
+  - Allow editing "globals"
+  - Allow editing api_key
+  - Launch different API dispatch screens
+- Different screens for different API dispatch
+- Non selectable
+  - RichLog
+  - TabbedContent
+- Keybinding to navigate TabbedContent
+  - Tab: next tab
+  - Shift-Tab: prev tab
+- Implement CommandPalette
+- Define and use global Primary/Secondary colors
+- Add help/? command 

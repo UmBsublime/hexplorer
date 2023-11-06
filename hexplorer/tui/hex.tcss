@@ -7,21 +7,99 @@ Screen {
 
 ApiParamPicker {
     align: center middle;
-
 }
 
 ApiParamPicker > Input {
     width: 50%;
 }
 
-ApiExplorer {
-    height: 5;
+ApiParamPicker > RadioSet {
+    width: auto;
+    padding-left: 3;
+    padding-right: 3;
 }
 
-#explorer-debug {
+ApiExplorerScreen {
+    border-top: thick darkolivegreen;
+    border-left: thick darkolivegreen;
+    border-right: thick darkolivegreen;
+    background: $background-lighten-1;
+    scrollbar-size: 1 1;
+
+}
+
+ApiExplorerScreen > TabbedContent {
     height: auto;
-    border: grey round;
+}
+
+
+
+ApiExplorer > Tree {
+    height: auto;
+    max-height: 12;
+    # margin-left: 1;
+    padding-bottom: 1;
+    background: $background-lighten-1;
+    border-bottom: round seagreen 25%;
+    scrollbar-size: 1 1;
+}
+
+ApiExplorer > Tree .tree--cursor {
+    background: darkolivegreen 50%;
+    # color: $boost;
+    text-style: underline;
+}
+
+ApiExplorer > Tree:focus .tree--cursor  {
+    background: darkolivegreen;
+    text-style: underline;
+}
+
+ApiExplorer {
+    height: auto;
+}
+
+
+ApiExplorerScreen > RichLog {
+    height: 1fr;
+    # border-top: thick seagreen;
+    background: $background-lighten-1;
+    min-height: 8;
+    margin-left: 1;
+    scrollbar-gutter: stable;
+    scrollbar-size: 1 1;
+}
+
+
+#explorer-debug {
+    display: none;
+    height: auto;
+    border-title-color: seagreen 50%;
+    border: round seagreen 50%;
     padding-left: 1;
+    padding-right: 1;
+}
+
+ApiExplorer.-show-debug #explorer-debug {
+    display: block;
+}
+
+Footer {
+    background: darkolivegreen;
+}
+
+Footer > .footer--highlight {
+        background: seagreen 50%;
+}
+
+Footer > .footer--highlight-key {
+        background: seagreen;
+        text-style: bold;
+}
+
+Footer > .footer--key {
+    text-style: bold;
+    background: seagreen 50%;
 }
 
 Button {

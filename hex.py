@@ -11,6 +11,6 @@ if __name__ == "__main__":
     hexapp = HexApp()
     request = hexapp.run()
     print(request)
-    if request:
-        print(request())
+    #if request:
+    #    print(request())
     sys.exit(hexapp.return_code or 0)
