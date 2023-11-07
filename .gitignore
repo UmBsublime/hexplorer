@@ -1,4 +1,6 @@
 **/__pycache__/
 .idea/
+.venv
 .python-version
 .env
+server.yaml
