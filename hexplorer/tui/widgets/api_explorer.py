@@ -2,6 +2,7 @@ from collections.abc import Callable
 from enum import Enum
 from functools import partial
 from pydantic import BaseModel
+from timeit import default_timer
 from typing import get_type_hints, Any, Optional, Type
 
 from rich.markup import escape
@@ -22,7 +23,6 @@ from hexplorer import LolApiDispatch, RiotApiDispatch
 
 class ApiExplorerScreen(Screen):
     BINDINGS = [
-        # ("e", "gen_request", "Get Request"),
         ("c", "clear_log", "Clear Log"),
         ("d", "toggle_debug", "Toggle Debug"),
         ("e", "execute_request", "Execute Request"),
@@ -40,14 +40,12 @@ class ApiExplorerScreen(Screen):
             for i in self.api_dispatch.__dict__.values():
                 with TabPane(i.__class__.__name__):
                     yield ApiExplorer(i)
-        #yield ApiExplorer(self.api_dispatch.league)
-        #yield ApiExplorer(self.api_dispatch.clash)
 
-        yield RichLog(id="fuck")
+        yield RichLog(id="api-explorer-log")
         yield Footer()
 
     def action_clear_log(self) -> None:
-        self.app.query_one("#fuck", RichLog).clear()
+        self.app.query_one("#api-explorer-log", RichLog).clear()
 
     def action_toggle_tree(self) -> None:
         for tree in self.query(Tree):
@@ -117,16 +115,16 @@ class ApiExplorer(Widget):
     @work(exclusive=True, thread=True)
     async def action_execute_request(self):
         if request := self.get_request():
+            start = default_timer()
             self.api_tree.loading = True
             try:
-                self.app.query_one("#fuck", RichLog).write(request())
+                self.app.query_one("#api-explorer-log", RichLog).write(request())
             except (ApiResourceNotFoundError, ApiUnauthorizedError, ApiBadRequestError) as e:
-                self.app.query_one("#fuck", RichLog).write(
+                self.app.query_one("#api-explorer-log", RichLog).write(
                     Text.from_markup(
                         e.args[0].replace('>',']').replace('<', '[')
                     )
                 )
-
             self.api_tree.loading = False
 
     def get_request(self) -> Optional[Callable]:
@@ -138,11 +136,11 @@ class ApiExplorer(Widget):
 
         for param in request_node.children:
             if not param.data['value']:
-                self.app.query_one("#fuck", RichLog).write("\nMissing parameters\n")
+                self.app.query_one("#api-explorer-log", RichLog).write("\nMissing parameters\n")
                 return None
 
         request = partial(request_node.data.method, *[p.data['value'] for p in request_node.children])
-        self.app.query_one("#fuck", RichLog).write(request)
+        self.app.query_one("#api-explorer-log", RichLog).write(request)
         return request
 
     def gen_api_tree(self) -> Tree[RiotApi]:
