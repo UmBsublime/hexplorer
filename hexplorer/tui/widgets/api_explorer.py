@@ -2,9 +2,10 @@ from collections.abc import Callable
 from enum import Enum
 from functools import partial
 from pydantic import BaseModel
-from typing import get_type_hints, Any, Optional
+from typing import get_type_hints, Any, Optional, Type
 
 from rich.markup import escape
+from rich.text import Text
 from textual import on, work
 from textual.app import ComposeResult
 from textual.containers import Vertical
@@ -119,12 +120,13 @@ class ApiExplorer(Widget):
             self.api_tree.loading = True
             try:
                 self.app.query_one("#fuck", RichLog).write(request())
-            except ApiResourceNotFoundError:
-                self.app.query_one("#fuck", RichLog).write("\n404 baby\n")
-            except ApiUnauthorizedError:
-                self.app.query_one("#fuck", RichLog).write("\n403 baby\n")
-            except ApiBadRequestError:
-                self.app.query_one("#fuck", RichLog).write("\n400 baby\n")
+            except (ApiResourceNotFoundError, ApiUnauthorizedError, ApiBadRequestError) as e:
+                self.app.query_one("#fuck", RichLog).write(
+                    Text.from_markup(
+                        e.args[0].replace('>',']').replace('<', '[')
+                    )
+                )
+
             self.api_tree.loading = False
 
     def get_request(self) -> Optional[Callable]:
@@ -212,6 +214,11 @@ def get_api_route_endpoints(api_route: RiotApi):
             )
 
     return object_methods
+
+
+class ApiRequestField(BaseModel):
+    type: Type
+    value: Optional[Any]
 
 
 class ApiRequest(BaseModel):
